@@ -1,4 +1,10 @@
 import "dotenv/config"
+import express from "express"
+
+const app = express();
+app.listen(process.env.PORT || 3000, () => {
+    console.log('Server is running, but not serving any user-facing routes');
+});
 const port = process.env.PORT || 4000;
 
 import { userDatabase, userMap } from "./database.js"
