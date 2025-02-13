@@ -1,4 +1,5 @@
 import "dotenv/config"
+const port = process.env.PORT || 4000;
 
 import { userDatabase, userMap } from "./database.js"
 import fs from "fs";
