@@ -1,11 +1,15 @@
 import "dotenv/config"
 import express from "express"
 
+const port = process.env.PORT || 4000;
 const app = express();
-app.listen(process.env.PORT || 3000, () => {
+app.get("/",(req,res)=>{
+    res.send("Fitfox Server is Running here")    
+})
+app.listen(port, () => {
     console.log('Server is running, but not serving any user-facing routes');
 });
-const port = process.env.PORT || 4000;
+
 
 import { userDatabase, userMap } from "./database.js"
 import fs from "fs";
