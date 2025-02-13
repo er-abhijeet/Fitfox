@@ -159,7 +159,7 @@ const setWtKeyboard = (wgt, component = "weight") => {
             }
         ]
     ]
-    console.log(`the detail is sb${detail}`)
+    // console.log(`the detail is sb${detail}`)
     return wt;
 }
 
@@ -226,7 +226,7 @@ const editMessageReplyMarkup = (message, reply_markup, newMessage, nomarkup = fa
             reply_markup: reply_markup
         })
     })
-        .then(console.log('message edited in ', message.message_id))
+        // .then(console.log('message edited in ', message.message_id))
         .catch(console.log("error in editing message"))
 
 }
@@ -332,9 +332,9 @@ const calculateCalories = (sender) => {
     fetch(url, options)
         .then((res) => res.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             calData = data.result.dailyCalories;
-            console.log('Calories fetched Succesfully');
+            // console.log('Calories fetched Succesfully');
             askTarget(sender, calData);
         })
         .catch((err) => {
@@ -351,20 +351,20 @@ const addcalories = (message, sender, set = false) => {
         if (words[i] == "protein") prot = parseInt(words[i - 1]);
     }
     if (set) {
-        console.log("set is ",set);
+        // console.log("set is ",set);
         cal = Math.round(cal*set);
         prot = Math.round(prot*set);
     }
     
     if (!Number.isFinite(cal) || !Number.isFinite(prot)) {
-        console.log(`calories is `,cal);
-        console.log(`protein is `,prot);
-        console.log(`text is `,words);
+        // console.log(`calories is `,cal);
+        // console.log(`protein is `,prot);
+        // console.log(`text is `,words);
         return;
     }
     let ob = userDatabase[userMap[sender.id]].diary[date];
     if (ob) {
-        console.log('data exists');
+        // console.log('data exists');
         ob.calories = parseInt(ob.calories) + cal;
         ob.protein = parseInt(ob.protein) + prot;
         ob.balance_cal = Math.max(0, parseInt(ob.balance_cal) - cal);
@@ -376,7 +376,7 @@ const addcalories = (message, sender, set = false) => {
         else editMessageReplyMarkup(message, "", `${cal} calories added to today, you have ${balance_cal} more calories to go..`);
     }
     else {
-        console.log('data does not exists');
+        // console.log('data does not exists');
         userDatabase[userMap[sender.id]].diary[date] = {
             balance_cal: parseInt(userDatabase[userMap[sender.id]].targetCalories) - cal,
             calories: cal,
@@ -457,7 +457,7 @@ const handleCallback = (callback) => {
 
         case "ch": // for incrementing and decrementing in custom selector
             let det = data.slice(0, 3);
-            console.log(det)
+            // console.log(det)
             switch (data) {
                 case `${det}-1`:
                     userDatabase[userMap[sender.id]][detailMap[det]] -= 1
@@ -492,7 +492,7 @@ const handleCallback = (callback) => {
                     editMessageReplyMarkup(message, reply_markup, `What about your ${detailMap[det]}?`)
                     break;
                 default:
-                    console.log('defualt in callback wt');
+                    // console.log('defualt in callback wt');
             }
             break;
 
@@ -648,7 +648,7 @@ const handleCallback = (callback) => {
                     break;
                 case "fd-change":
                     fetch(`${url}/answerCallbackQuery?callback_query_id=${callback.id}&text="Please reply to the initial message with the quantity in grams."`)
-                        .then(console.log("done"))
+                        .then(()=>{})
                         .catch(console.log("not done"))
             }
 
@@ -797,7 +797,7 @@ let lastUpdateId = 0;
 const getUpdate = () => {
     if(isfetching)return;
     isfetching=true;
-    console.log('Getting message...');
+    // console.log('Getting message...');
 
     const timeoutValue = 1;   //dont change this value it is related to and should be less than half of intervalTime
     fetch(`${url}/getUpdates?offset=${lastUpdateId + 1}`)

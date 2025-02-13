@@ -17,8 +17,8 @@ export const userDatabase = [
     "targetCalories": "2969",
     "diary": {
       "14022025": {
-        "balance_cal": 1970,
-        "calories": 999,
+        "balance_cal": 1936,
+        "calories": 1033,
         "protein": 104
       }
     }
